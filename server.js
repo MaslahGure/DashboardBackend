@@ -35,7 +35,7 @@ app.use(cookieParser())
 app.use('/api/register',require("./routes/register"));
 app.use('/api/auth',require("./routes/auth"));
 app.use('/api/logout',require("./routes/logout"));
-app.use('/api/users',require("./routes/api/users"));
+
 
 app.use('/api/refresh',require("./routes/refresh"));// should be placed right before JWT verify 
 app.use(verifyJWT)// placed before the routes to be protected 
@@ -43,6 +43,7 @@ app.use(verifyJWT)// placed before the routes to be protected
 
 app.use('/api/convdata',require("./routes/api/convdata"));
 app.use('/api/convstat',require("./routes/api/convstat"));
+app.use('/api/users',require("./routes/api/users"));
 app.use('/api/profile',require("./routes/profile"));
 
 
