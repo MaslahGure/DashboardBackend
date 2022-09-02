@@ -10,7 +10,7 @@ const app = express();
 const PORT =process.env.PORT || 3001;
 
 //Log server events
-app.use(logger);
+//app.use(logger);
 
 
 
