@@ -7,6 +7,7 @@ const updateUserPassword ="UPDATE users SET password = $1 WHERE email = $2";
 const updateUserToken ="UPDATE users SET refreshToken = $1 WHERE username = $2";
 const checkRefreshTokenExists ="SELECT * FROM users WHERE refreshToken = $1";
 const updateUserPhotoUrl ="UPDATE users SET photoUrl = $1 WHERE email = $2";
+const updateUserDatabase ="UPDATE users SET database = $1, tablename =$2 WHERE email = $3";
 
 
 module.exports = {
@@ -18,5 +19,6 @@ module.exports = {
     updateUserPassword,
     updateUserToken,
     checkRefreshTokenExists,
-    updateUserPhotoUrl
+    updateUserPhotoUrl,
+    updateUserDatabase
 }

@@ -45,6 +45,8 @@ app.use('/api/convdata',require("./routes/api/convdata"));
 app.use('/api/convstat',require("./routes/api/convstat"));
 app.use('/api/users',require("./routes/api/users"));
 app.use('/api/profile',require("./routes/profile"));
+app.use('/api/users/manage-user',require("./routes/api/userdb"));
+app.use('/api/client-data',require("./routes/api/clientData"));
 
 
 
@@ -52,7 +54,7 @@ app.use('/api/profile',require("./routes/profile"));
 // all routes undefined
 app.all('*', (req, res) => {
    // res.status(404);  
-    res.status(404).send("Server side running");
+    res.status(404).send("page does not exist 404");
 });
 app.listen(PORT, () => console.log(`App running on port ${PORT}`));
 

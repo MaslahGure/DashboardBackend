@@ -1,4 +1,4 @@
-const pool = require("../config/db");
+const pool = require("../config/db").pool;
 const queries = require ("../queries/usersQueries");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -25,6 +25,8 @@ const handleRefreshToken = (req,res) =>{
         const email = user.email;
         const userId =user.id;
         const photoUrl =user.photourl;
+        const database =user.database;
+        const tablename =user.tablename;
         jwt.verify(
             refreshToken,
             process.env.ACCESS_TOKEN_SECRET,
@@ -36,7 +38,8 @@ const handleRefreshToken = (req,res) =>{
                     process.env.ACCESS_TOKEN_SECRET,
                     {expiresIn: "5m"} // AccessToken renewal interval
                 );
-                res.json({accessToken,username,email,userId,photoUrl})
+                res.json({accessToken,username,email,userId,photoUrl,database,tablename})
+                
             }
         );
          });
