@@ -6,6 +6,7 @@ const bcrypt =require("bcrypt")
 const handleNewUser = async(req,res) =>{
     const {username,password,email}=req.body;
     const hashedPassword = await bcrypt.hash(password,10);
+    const role =4848; // client role granted
     // if user data is not complete raise error
     if(!username || !password ||!email) return res.status(400).json({"message":"Username, password and email are required"});
     //check if email is taken
@@ -18,7 +19,7 @@ const handleNewUser = async(req,res) =>{
         // If Email not taken  
         try {
         //Register new user
-        pool.query(queries.addUser,[username,hashedPassword,email],(error,result)=>{
+        pool.query(queries.addUser,[username,hashedPassword,email,role],(error,result)=>{
         if(error) throw error;
                 res.status(201).json({"success":`New user ${username} created`});
             })

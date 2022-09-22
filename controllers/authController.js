@@ -24,12 +24,18 @@ const handleLogin = async(req,res) =>{
         if(match){
             //send JWT - Tokens
             const accessToken = jwt.sign(
-                {"username":user.username},
+                {"UserInfo":{
+                    "username":user.username,
+                    "role":user.role}
+                },
                 process.env.ACCESS_TOKEN_SECRET,
                 {expiresIn: "60s"}
             )
             const refreshToken = jwt.sign(
-                {"username":user.username},
+                {"UserInfo":{
+                    "username":user.username,
+                    "role":user.role}
+                },
                 process.env.ACCESS_TOKEN_SECRET,
                 {expiresIn: "1d"}
             );

@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 const usersController = require('../../controllers/usersController');
 
-//const ROLES_LIST = require('../../config/roles_list');
-//const verifyRoles = require('../../middleware/verifyRoles');
+const ROLES_LIST = require('../../config/roles_list');
+const verifyRoles = require('../../middleware/verifyRoles');
 
 router.route('/')
-    .get(usersController.getAllUsers)
-    .post(usersController.addUser);
+    .get(verifyRoles(ROLES_LIST.Admin),usersController.getAllUsers)
+    .post(verifyRoles(ROLES_LIST.Admin),usersController.addUser);
     //.post(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), employeesController.createNewEmployee)
     //.put(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor), employeesController.updateEmployee)
    // .delete(verifyRoles(ROLES_LIST.Admin), employeesController.deleteEmployee);

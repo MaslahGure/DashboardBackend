@@ -21,24 +21,22 @@ const handleRefreshToken = (req,res) =>{
         }
         const user = result.rows[0];//update before launch
         // evaluate jwt 
-        const username =user.username;
-        const email = user.email;
-        const userId =user.id;
-        const photoUrl =user.photourl;
-        const database =user.database;
-        const tablename =user.tablename;
+        const {username,email,id,photourl,database,tablename,role}=user
         jwt.verify(
             refreshToken,
             process.env.ACCESS_TOKEN_SECRET,
             (err,decodedToken) =>{
-                if(err || user.username !==decodedToken.username) return res.sendStatus(403);
+                if(err || user.username !==decodedToken.UserInfo.username) return res.sendStatus(403);
 
                 const accessToken = jwt.sign(
-                    {"username":decodedToken.username},
+                    {"UserInfo":{
+                        "username":decodedToken.UserInfo.username,
+                        "role":decodedToken.UserInfo.role}
+                    },
                     process.env.ACCESS_TOKEN_SECRET,
                     {expiresIn: "5m"} // AccessToken renewal interval
                 );
-                res.json({accessToken,username,email,userId,photoUrl,database,tablename})
+                res.json({accessToken,username,email,id,photourl,database,tablename,role})
                 
             }
         );

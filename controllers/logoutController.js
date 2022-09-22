@@ -35,6 +35,6 @@ const handleLogout = (req,res) =>{
 }; 
 
 
-module.exports = {
+module.exports = { 
     handleLogout
 }
