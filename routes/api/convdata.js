@@ -4,6 +4,6 @@ const convDataController =require("../../controllers/convDataController");
 
 
 
-router.get("/",convDataController.handleConvData);
+router.post("/",convDataController.handleConvData);
 
 module.exports =router;
