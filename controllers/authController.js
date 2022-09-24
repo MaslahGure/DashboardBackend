@@ -18,6 +18,7 @@ const handleLogin = async(req,res) =>{
             
         }
         const user = result.rows[0];//update before launch
+        const {username,email,id,photourl,database,tablename,role}=user
         // If user exists match password 
         const match =await bcrypt.compare(password,user.password);
 
@@ -46,7 +47,7 @@ const handleLogin = async(req,res) =>{
                 //res.status(200).send("Refresh token updated updated successfully");
              });
             res.cookie("jwt",refreshToken,{httpOnly: true, sameSite: 'None', secure: true,maxAge:24 * 60 * 60 * 1000})
-            res.json({accessToken}) // at the frontend store in memory for security
+            res.json({accessToken,username,email,id,photourl,database,tablename,role}) // at the frontend store in memory for security
         }else{
             res.sendStatus(401);// unauthorized
         }
